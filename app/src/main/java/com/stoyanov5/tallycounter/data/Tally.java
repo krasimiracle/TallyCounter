@@ -4,7 +4,11 @@ package com.stoyanov5.tallycounter.data;
  * Created by B3f0r on 08-Feb-18.
  */
 
-public class Tally {
+/**
+ * Immutable model class for a Tally.
+ */
+@Entity(tableName = "tallies")
+public final class Tally {
 
     private int counter;
 
