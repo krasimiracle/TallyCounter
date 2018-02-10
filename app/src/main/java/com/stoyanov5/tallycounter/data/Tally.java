@@ -21,7 +21,6 @@ public final class Tally {
     @ColumnInfo(name = "entryid")
     private final String id;
 
-    @NonNull
     @ColumnInfo(name = "counter")
     private int counter = 0;
 
@@ -29,9 +28,22 @@ public final class Tally {
     @ColumnInfo(name = "name")
     private String Name;
 
-    public Tally(@NonNull String id, @Nullable String name, @NonNull int counter){
+    public Tally(@NonNull String id, @Nullable String name, @NonNull int counter) {
         this.id = id;
         this.Name = name;
+        this.counter = counter;
+    }
+
+    @NonNull
+    public String getId() {
+        return id;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
         this.counter = counter;
     }
 
@@ -42,5 +54,4 @@ public final class Tally {
     public void setName(String name) {
         Name = name;
     }
-
 }
