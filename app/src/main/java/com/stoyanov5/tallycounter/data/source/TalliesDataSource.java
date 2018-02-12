@@ -38,6 +38,8 @@ public interface TalliesDataSource {
 
     void refreshTallies();
 
+    void saveTally(@NonNull Tally tally);
+
     void deleteTally(@NonNull String tallyId);
 
     void deleteAllTallies();
