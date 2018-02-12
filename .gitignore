@@ -78,3 +78,6 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 .idea/workspace.xml
 .idea/workspace.xml
+.gradle/4.1/taskHistory/taskHistory.lock
+*.lock
+.gradle/4.1/fileHashes/fileHashes.bin
