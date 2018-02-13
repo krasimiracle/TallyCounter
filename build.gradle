@@ -35,7 +35,7 @@ ext {
     compileSdkVersion = 26
 
     // App dependencies
-    supportLibraryVersion = '26.1.0'
+    supportLibraryVersion = '27.0.2'
     roomVersion = "1.0.0"
     espressoVersion = '3.0.1'
     guavaVersion = '18.0'
