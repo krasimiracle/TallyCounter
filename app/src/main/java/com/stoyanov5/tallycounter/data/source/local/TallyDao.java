@@ -19,14 +19,15 @@ public interface TallyDao {
 
     /**
      * Select all tallies from the tallies table
+     *
      * @return all tallies.
      */
     @Query("Select * FROM Tallies")
     List<Tally> getTallies();
 
-
     /**
      * Select a tally by id.
+     *
      * @param tallyId the tally id.
      * @return a tally with tallyId.
      */
@@ -35,6 +36,7 @@ public interface TallyDao {
 
     /**
      * Insert a tally in the database. If the tally already exists, it will get replaced.
+     *
      * @param tally the tally to be inserted
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -42,6 +44,7 @@ public interface TallyDao {
 
     /**
      * Update a tally
+     *
      * @param tally the tally to be updated
      * @return the number of tallies updated. This should always be 1.
      */

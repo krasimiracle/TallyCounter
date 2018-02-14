@@ -2,6 +2,7 @@ package com.stoyanov5.tallycounter.tallies;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -13,10 +14,14 @@ import com.stoyanov5.tallycounter.R;
 
 public class TalliesActivity extends AppCompatActivity {
 
+    private DrawerLayout drawerLayout;
+
+    private TalliesPresenter talliesPresenter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tallies_act);
+        setContentView(R.layout.tallies_activity);
 
         // Set up the toolbar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
