@@ -27,7 +27,7 @@ public class TalliesActivity extends AppCompatActivity {
         setContentView(R.layout.tallies_activity);
 
         // Set up the toolbar.
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -36,7 +36,7 @@ public class TalliesActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
         NavigationView navigationView = findViewById(R.id.navigation_view);
-        if (navigationView != null){
+        if (navigationView != null) {
             setupDrawerContent();
         }
 
@@ -52,7 +52,7 @@ public class TalliesActivity extends AppCompatActivity {
         //talliesPresenter = new TalliesPresenter();
     }
 
-    private void setupDrawerContent(){
+    private void setupDrawerContent() {
 
     }
 }
