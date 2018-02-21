@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.stoyanov5.tallycounter.data.source.TalliesRepository;
+import com.stoyanov5.tallycounter.data.source.local.TalliesLocalDataSource;
 import com.stoyanov5.tallycounter.data.source.local.TallyDatabase;
 import com.stoyanov5.tallycounter.util.AppExecutors;
 
@@ -18,8 +19,7 @@ public class Injection {
     public static TalliesRepository provideTalliesRepository(@NonNull Context context) {
         checkNotNull(context);
         TallyDatabase database = TallyDatabase.getInstance(context);
-        return TalliesRepository.getInstance(FakeTasksRemoteDataSource.getInstance(),
-                TasksLocalDataSource.getInstance(new AppExecutors(),
-                        database.taskDao()));
+        return TalliesRepository.getInstance(TalliesLocalDataSource.getInstance(new AppExecutors(),
+                database.tallyDao()));
     }
 }

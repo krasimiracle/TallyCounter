@@ -23,7 +23,7 @@ public abstract class TallyDatabase extends RoomDatabase {
 
     private static final Object sLock = new Object();
 
-    public static TallyDatabase getINSTANCE(Context context) {
+    public static TallyDatabase getInstance(Context context) {
         synchronized (sLock) {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
