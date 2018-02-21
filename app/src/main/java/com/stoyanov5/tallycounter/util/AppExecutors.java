@@ -34,7 +34,19 @@ public class AppExecutors {
                 new MainThreadExecutor());
     }
 
-    private static class MainThreadExecutor implements Executor{
+    public Executor getDiskIO() {
+        return diskIO;
+    }
+
+    public Executor getNetworkIO() {
+        return networkIO;
+    }
+
+    public Executor getMainThread() {
+        return mainThread;
+    }
+
+    private static class MainThreadExecutor implements Executor {
         private Handler mainThreadHandler = new Handler(Looper.getMainLooper());
 
         @Override

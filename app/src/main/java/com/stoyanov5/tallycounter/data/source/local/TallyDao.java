@@ -52,6 +52,14 @@ public interface TallyDao {
     int updateTally(Tally tally);
 
     /**
+     * Delete a tally by id.
+     *
+     * @return the number of tallies deleted. This should always be 1.
+     */
+    @Query("DELETE FROM Tallies WHERE entryid = :tallyId")
+    int deleteTallyById(String tallyId);
+
+    /**
      * Delete all tallies.
      */
     @Query("DELETE FROM Tallies")
