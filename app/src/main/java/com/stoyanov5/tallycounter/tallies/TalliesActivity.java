@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.stoyanov5.tallycounter.Injection;
 import com.stoyanov5.tallycounter.R;
 import com.stoyanov5.tallycounter.util.ActivityUtils;
 
@@ -49,7 +50,7 @@ public class TalliesActivity extends AppCompatActivity {
         }
 
         // Create Presenter
-        //talliesPresenter = new TalliesPresenter();
+        talliesPresenter = new TalliesPresenter(Injection.provideTalliesRepository(getApplicationContext()), talliesFragment);
     }
 
     private void setupDrawerContent() {

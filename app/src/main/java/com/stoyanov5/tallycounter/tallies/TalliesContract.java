@@ -21,7 +21,7 @@ public interface TalliesContract {
     }
 
     interface Presenter extends BasePresenter {
-        void addNewTallie();
+        void addNewTally();
 
         void loadTallies(boolean forceUpdate);
 
