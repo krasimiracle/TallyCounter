@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.stoyanov5.tallycounter.R;
 import com.stoyanov5.tallycounter.data.Tally;
 
 import java.util.ArrayList;
@@ -50,7 +51,9 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View root = inflater.inflate(R.layout.tallies_fragment, container, false);
+
+        return root;
     }
 
     @Override

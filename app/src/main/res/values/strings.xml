@@ -2,4 +2,5 @@
     <string name="app_name">TallyCounter</string>
     <string name="navigation_view_header_title">Tallies</string>
     <string name="list_title">Tally List</string>
+    <string name="you_have_no_tallies">You have no Tallies!</string>
 </resources>

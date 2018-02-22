@@ -39,7 +39,6 @@ public class TalliesPresenter implements TalliesContract.Presenter {
     public void loadTallies(boolean forceUpdate) {
         if (forceUpdate) {
             //Refresh tallies
-
         }
     }
 
