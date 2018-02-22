@@ -26,11 +26,11 @@ public final class Tally {
 
     @Nullable
     @ColumnInfo(name = "name")
-    private String Name;
+    private String name;
 
     public Tally(@NonNull String id, @Nullable String name, @NonNull int counter) {
         this.id = id;
-        this.Name = name;
+        this.name = name;
         this.counter = counter;
     }
 
@@ -48,10 +48,10 @@ public final class Tally {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 }
