@@ -6,9 +6,14 @@ package com.stoyanov5.tallycounter.data;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import com.google.common.base.Strings;
+
+import java.util.UUID;
 
 /**
  * Immutable model class for a Tally.
@@ -25,12 +30,17 @@ public final class Tally {
     private int counter = 0;
 
     @Nullable
-    @ColumnInfo(name = "name")
-    private String name;
+    @ColumnInfo(name = "title")
+    private String title;
+    
+    @Ignore
+    public Tally(@Nullable String title) {
+        this(UUID.randomUUID().toString(), title, 0);
+    }
 
-    public Tally(@NonNull String id, @Nullable String name, @NonNull int counter) {
+    public Tally(@NonNull String id, @Nullable String title, @NonNull int counter) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.counter = counter;
     }
 
@@ -47,11 +57,15 @@ public final class Tally {
         this.counter = counter;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isEmpty() {
+        return Strings.isNullOrEmpty(title);
     }
 }
