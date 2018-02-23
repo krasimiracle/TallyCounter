@@ -3,11 +3,16 @@ package com.stoyanov5.tallycounter.tallies;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.stoyanov5.tallycounter.R;
 import com.stoyanov5.tallycounter.data.Tally;
@@ -26,6 +31,14 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
     private TalliesContract.Presenter talliesPresenter;
 
     private TalliesAdapter talliesAdapter;
+
+    private LinearLayout talliesView;
+
+    private View noTalliesView;
+
+    private ImageView noTalliesImage;
+
+    private TextView noTalliesText;
 
     // Required empty constructor
     public TalliesFragment() {
@@ -53,6 +66,25 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.tallies_fragment, container, false);
 
+        // Tallies View
+        ListView listView = root.findViewById(R.id.tallies_list);
+        listView.setAdapter(talliesAdapter);
+        talliesView = root.findViewById(R.id.tallies_linearlayout);
+
+        // No Tallies View
+        noTalliesView = root.findViewById(R.id.noTallies);
+        noTalliesImage = root.findViewById(R.id.noTallyIcon);
+        noTalliesText = root.findViewById(R.id.noTallyText);
+
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab_add_tally);
+        fab.setImageResource(R.drawable.ic_add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //talliesPresenter.addNewTally();
+            }
+        });
+
         return root;
     }
 
@@ -68,7 +100,7 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
 
     @Override
     public void showTallies(List<Tally> tallies) {
-
+        talliesView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -92,6 +124,14 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
             // presenter.decrementTally
         }
     };
+
+    private void showNoTalliesView(String text, int iconRes) {
+        talliesView.setVisibility(View.GONE);
+        noTalliesView.setVisibility(View.VISIBLE);
+
+        noTalliesText.setText(text);
+        noTalliesImage.setImageDrawable(getResources().getDrawable(iconRes));
+    }
 
     private static class TalliesAdapter extends BaseAdapter {
 
