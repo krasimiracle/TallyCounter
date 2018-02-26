@@ -21,34 +21,40 @@ public class AddTallyPresenter implements AddTallyContract.Presenter, TalliesDat
     @Nullable
     private String tallyId;
 
-    public AddTallyPresenter(String tallyId, @NonNull TalliesDataSource talliesDataSource, @NonNull AddTallyContract.View addTallyView) {
+    private boolean isDataMissing;
+
+    public AddTallyPresenter(String tallyId, @NonNull TalliesDataSource talliesDataSource,
+                             @NonNull AddTallyContract.View addTallyView, boolean shouldLoadDataFromRepo) {
         this.tallyId = tallyId;
         this.talliesDataSource = talliesDataSource;
         this.addTallyView = addTallyView;
+        isDataMissing = shouldLoadDataFromRepo;
 
         addTallyView.setPresenter(this);
     }
 
     @Override
     public void start() {
-        if (!isNewTask()) {
+        if (!isNewTally() && isDataMissing) {
             populateTally();
         }
     }
 
     @Override
     public void saveTally(String title) {
-        if (isNewTask()) {
+        if (isNewTally()) {
             createTally(title);
+        }
+        else {
+            updateTally(title);
         }
     }
 
     @Override
     public void populateTally() {
-        if (isNewTask()) {
+        if (isNewTally()) {
             throw new RuntimeException("populateTally() was called but tally is new");
-        }
-        else {
+        } else {
             talliesDataSource.getTally(tallyId, this);
         }
     }
@@ -67,7 +73,7 @@ public class AddTallyPresenter implements AddTallyContract.Presenter, TalliesDat
         }
     }
 
-    private boolean isNewTask() {
+    private boolean isNewTally() {
         return tallyId == null;
     }
 
@@ -75,11 +81,18 @@ public class AddTallyPresenter implements AddTallyContract.Presenter, TalliesDat
         Tally newTally = new Tally(title);
         if (newTally.isEmpty()) {
             addTallyView.showEmptyTallyError();
-        }
-        else {
+        } else {
             talliesDataSource.saveTally(newTally);
             addTallyView.showTalliesList();
         }
+    }
+
+    private void updateTally(String title) {
+        if (isNewTally()) {
+            throw new RuntimeException("updateTally() was called but tally is new");
+        }
+        talliesDataSource.saveTally(new Tally(title, tallyId));
+        addTallyView.showTalliesList();
     }
 
 }

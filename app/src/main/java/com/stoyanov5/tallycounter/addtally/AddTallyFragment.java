@@ -2,10 +2,10 @@ package com.stoyanov5.tallycounter.addtally;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,27 +27,23 @@ public class AddTallyFragment extends Fragment implements AddTallyContract.View 
 
     private TextView title;
 
-    public AddTallyFragment() {
-
-    }
-
     public static AddTallyFragment newInstance() {
         return new AddTallyFragment();
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.addtally_fragment, container, false);
-        title = root.findViewById(R.id.add_tally_title);
-        setHasOptionsMenu(false);
-        return root;
+    public AddTallyFragment() {
+        // Empty Constructor
     }
 
     @Override
     public void onResume() {
         super.onResume();
         addTallyPresenter.start();
+    }
+
+    @Override
+    public void setPresenter(AddTallyContract.Presenter presenter) {
+        addTallyPresenter = checkNotNull(presenter);
     }
 
     @Override
@@ -64,9 +60,13 @@ public class AddTallyFragment extends Fragment implements AddTallyContract.View 
         });
     }
 
+    @Nullable
     @Override
-    public void setPresenter(AddTallyContract.Presenter presenter) {
-        addTallyPresenter = checkNotNull(presenter);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.addtally_fragment, container, false);
+        title = root.findViewById(R.id.add_tally_title);
+        setHasOptionsMenu(false);
+        return root;
     }
 
     @Override

@@ -38,6 +38,11 @@ public final class Tally {
         this(UUID.randomUUID().toString(), title, 0);
     }
 
+    @Ignore
+    public Tally(@Nullable String title,@NonNull String id) {
+        this(title, id, 0);
+    }
+
     public Tally(@NonNull String id, @Nullable String title, @NonNull int counter) {
         this.id = id;
         this.title = title;
