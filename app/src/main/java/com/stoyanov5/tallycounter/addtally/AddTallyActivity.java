@@ -18,6 +18,8 @@ public class AddTallyActivity extends AppCompatActivity {
 
     public static final int REQUEST_ADD_TALLY = 1;
 
+    public static final String SHOULD_LOAD_DATA_FROM_REPO_KEY = "SHOULD_LOAD_DATA_FROM_REPO_KEY";
+
     private AddTallyPresenter addTallyPresenter;
 
     private ActionBar actionBar;
@@ -52,6 +54,19 @@ public class AddTallyActivity extends AppCompatActivity {
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), addTallyFragment, R.id.addtally_contentFrame);
         }
 
-        addTallyPresenter = new AddTallyPresenter(tallyId, Injection.provideTalliesRepository(getApplicationContext()), addTallyFragment);
+        boolean shouldLoadDataFromRepo = true;
+
+        if (savedInstanceState != null) {
+            shouldLoadDataFromRepo = savedInstanceState.getBoolean(SHOULD_LOAD_DATA_FROM_REPO_KEY);
+        }
+
+        addTallyPresenter = new AddTallyPresenter(tallyId, Injection.provideTalliesRepository(getApplicationContext()),
+                addTallyFragment, shouldLoadDataFromRepo);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(SHOULD_LOAD_DATA_FROM_REPO_KEY, addTallyPresenter.isDataMissing());
+        super.onSaveInstanceState(outState);
     }
 }

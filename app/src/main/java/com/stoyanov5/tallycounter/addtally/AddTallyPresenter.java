@@ -44,8 +44,7 @@ public class AddTallyPresenter implements AddTallyContract.Presenter, TalliesDat
     public void saveTally(String title) {
         if (isNewTally()) {
             createTally(title);
-        }
-        else {
+        } else {
             updateTally(title);
         }
     }
@@ -64,6 +63,7 @@ public class AddTallyPresenter implements AddTallyContract.Presenter, TalliesDat
         if (addTallyView.isActive()) {
             addTallyView.setTitle(tally.getTitle());
         }
+        isDataMissing = false;
     }
 
     @Override
@@ -71,6 +71,11 @@ public class AddTallyPresenter implements AddTallyContract.Presenter, TalliesDat
         if (addTallyView.isActive()) {
             addTallyView.showEmptyTallyError();
         }
+    }
+
+    @Override
+    public boolean isDataMissing() {
+        return isDataMissing;
     }
 
     private boolean isNewTally() {
@@ -94,5 +99,4 @@ public class AddTallyPresenter implements AddTallyContract.Presenter, TalliesDat
         talliesDataSource.saveTally(new Tally(title, tallyId));
         addTallyView.showTalliesList();
     }
-
 }

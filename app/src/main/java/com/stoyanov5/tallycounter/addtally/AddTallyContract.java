@@ -25,5 +25,7 @@ public interface AddTallyContract {
         void saveTally(String title);
 
         void populateTally();
+
+        boolean isDataMissing();
     }
 }
