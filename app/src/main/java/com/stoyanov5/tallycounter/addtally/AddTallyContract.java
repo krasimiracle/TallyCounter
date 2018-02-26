@@ -16,6 +16,8 @@ public interface AddTallyContract {
         void showTalliesList();
 
         void setTitle(String title);
+
+        boolean isActive();
     }
 
     interface Presenter extends BasePresenter {

@@ -55,12 +55,16 @@ public class AddTallyPresenter implements AddTallyContract.Presenter, TalliesDat
 
     @Override
     public void onTallyLoaded(Tally tally) {
-
+        if (addTallyView.isActive()) {
+            addTallyView.setTitle(tally.getTitle());
+        }
     }
 
     @Override
     public void onDataNotAvailable() {
-
+        if (addTallyView.isActive()) {
+            addTallyView.showEmptyTallyError();
+        }
     }
 
     private boolean isNewTask() {
