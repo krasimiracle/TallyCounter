@@ -103,7 +103,10 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
 
     @Override
     public void showTallies(List<Tally> tallies) {
+        talliesAdapter.replaceData(tallies);
+
         talliesView.setVisibility(View.VISIBLE);
+        noTalliesView.setVisibility(View.GONE);
     }
 
     @Override
@@ -152,28 +155,45 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
             this.tallyItemListener = tallyItemListener;
         }
 
-        @Override
-        public int getCount() {
-            return 0;
+        private void setList(List<Tally> tallies) {
+            this.tallies = checkNotNull(tallies);
+        }
+
+        public void replaceData(List<Tally> tallies) {
+            setList(tallies);
+            notifyDataSetChanged();
         }
 
         @Override
-        public Object getItem(int i) {
-            return null;
+        public int getCount() {
+            return tallies.size();
+        }
+
+        @Override
+        public Tally getItem(int i) {
+            return tallies.get(i);
         }
 
         @Override
         public long getItemId(int i) {
-            return 0;
+            return i;
         }
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            return null;
-        }
+            View rowView = view;
 
-        private void setList(List<Tally> tallies) {
-            this.tallies = checkNotNull(tallies);
+            if (rowView == null){
+                LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+                rowView = inflater.inflate(R.layout.tally_item, viewGroup, false);
+            }
+
+            final Tally tally = getItem(i);
+
+            TextView title = rowView.findViewById(R.id.tally_title);
+            title.setText(tally.getTitle());
+
+            return rowView;
         }
     }
 
