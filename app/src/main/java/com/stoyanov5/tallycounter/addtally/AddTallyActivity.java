@@ -22,8 +22,6 @@ public class AddTallyActivity extends AppCompatActivity {
 
     private AddTallyPresenter addTallyPresenter;
 
-    private ActionBar actionBar;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,15 +30,16 @@ public class AddTallyActivity extends AppCompatActivity {
         // Set up toolbar.
         Toolbar toolbar = findViewById(R.id.addtally_toolbar);
         setSupportActionBar(toolbar);
-        actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-        AddTallyFragment addTallyFragment = (AddTallyFragment) getSupportFragmentManager().findFragmentById(R.id.addtally_contentFrame);
+        AddTallyFragment addTallyFragment = (AddTallyFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.addtally_contentFrame);
 
         String tallyId = getIntent().getStringExtra(AddTallyFragment.ARGUMENT_TALLY_ID);
 
-        actionBar.setTitle("New Tally");
+        actionBar.setTitle(tallyId);
 
         if (addTallyFragment == null) {
             addTallyFragment = AddTallyFragment.newInstance();
@@ -51,7 +50,8 @@ public class AddTallyActivity extends AppCompatActivity {
                 addTallyFragment.setArguments(bundle);
             }
 
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), addTallyFragment, R.id.addtally_contentFrame);
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                    addTallyFragment, R.id.addtally_contentFrame);
         }
 
         boolean shouldLoadDataFromRepo = true;

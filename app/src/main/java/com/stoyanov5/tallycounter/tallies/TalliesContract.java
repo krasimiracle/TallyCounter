@@ -19,7 +19,13 @@ public interface TalliesContract {
 
         void showAddTally();
 
+        void showNoTallies();
+
         void showSuccessfullySavedMessage();
+
+        void showLoadingTalliesError();
+
+        boolean isActive();
     }
 
     interface Presenter extends BasePresenter {

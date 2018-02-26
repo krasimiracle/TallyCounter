@@ -116,8 +116,23 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
     }
 
     @Override
+    public void showNoTallies() {
+        showNoTalliesView("You have no Tallies!", R.drawable.ic_launcher_foreground);
+    }
+
+    @Override
     public void showSuccessfullySavedMessage() {
         Snackbar.make(checkNotNull(getView()), "Tally saved", Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showLoadingTalliesError() {
+        Snackbar.make(checkNotNull(getView()), R.string.loading_tallies_error, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean isActive() {
+        return isAdded();
     }
 
     TallyItemListener tallyItemListener = new TallyItemListener() {

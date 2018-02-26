@@ -69,10 +69,10 @@ public class TalliesPresenter implements TalliesContract.Presenter {
 
             @Override
             public void onDataNotAvailable() {
-               //if (!talliesView.isActive()) {
-               //    return;
-               //}
-               //talliesView.showLoadingTalliesError();
+               if (!talliesView.isActive()) {
+                   return;
+               }
+               talliesView.showLoadingTalliesError();
             }
         });
 
@@ -80,7 +80,7 @@ public class TalliesPresenter implements TalliesContract.Presenter {
 
     private void processTallies(List<Tally> tallies) {
         if (tallies.isEmpty()) {
-
+            talliesView.showNoTallies();
         } else {
             talliesView.showTallies(tallies);
         }
