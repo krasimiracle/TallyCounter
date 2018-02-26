@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.stoyanov5.tallycounter.addtally.AddTallyActivity;
+import com.stoyanov5.tallycounter.data.Tally;
+import com.stoyanov5.tallycounter.data.source.TalliesDataSource;
 import com.stoyanov5.tallycounter.data.source.TalliesRepository;
+
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -40,17 +44,51 @@ public class TalliesPresenter implements TalliesContract.Presenter {
     }
 
     @Override
-    public void addNewTally() {
-        talliesView.showAddTally();
+    public void loadTallies(boolean forceUpdate) {
+        loadTallies(forceUpdate || firstLoad, true);
+        firstLoad = false;
     }
 
-    @Override
-    public void loadTallies(boolean forceUpdate) {
+    private void loadTallies(boolean forceUpdate, final boolean showLoadingUI) {
+        if (showLoadingUI) {
+            talliesView.setLoadingIndicator(true);
+        }
         if (forceUpdate) {
-            //Refresh tallies
+            talliesRepository.refreshTallies();
+        }
+
+        talliesRepository.getTallies(new TalliesDataSource.LoadTalliesCallback() {
+            @Override
+            public void onTalliesLoaded(List<Tally> tallies) {
+                if (showLoadingUI) {
+                    talliesView.setLoadingIndicator(false);
+                }
+
+                processTallies(tallies);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+               //if (!talliesView.isActive()) {
+               //    return;
+               //}
+               //talliesView.showLoadingTalliesError();
+            }
+        });
+
+    }
+
+    private void processTallies(List<Tally> tallies) {
+        if (tallies.isEmpty()) {
+
+        } else {
+            talliesView.showTallies(tallies);
         }
     }
 
-
+    @Override
+    public void addNewTally() {
+        talliesView.showAddTally();
+    }
 
 }

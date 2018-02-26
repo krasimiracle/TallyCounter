@@ -26,9 +26,9 @@ public interface TalliesContract {
 
         void result(int requestCode, int resultCode);
 
-        void addNewTally();
-
         void loadTallies(boolean forceUpdate);
+
+        void addNewTally();
 
     }
 }
