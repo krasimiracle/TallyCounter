@@ -18,9 +18,14 @@ public interface TalliesContract {
         void showTallies(List<Tally>tallies);
 
         void showAddTally();
+
+        void showSuccessfullySavedMessage();
     }
 
     interface Presenter extends BasePresenter {
+
+        void result(int requestCode, int resultCode);
+
         void addNewTally();
 
         void loadTallies(boolean forceUpdate);

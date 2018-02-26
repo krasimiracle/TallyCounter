@@ -16,6 +16,8 @@ import com.stoyanov5.tallycounter.util.ActivityUtils;
 
 public class AddTallyActivity extends AppCompatActivity {
 
+    public static final int REQUEST_ADD_TALLY = 1;
+
     private AddTallyPresenter addTallyPresenter;
 
     private ActionBar actionBar;

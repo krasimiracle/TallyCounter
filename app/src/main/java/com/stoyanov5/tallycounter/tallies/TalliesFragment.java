@@ -1,9 +1,11 @@
 package com.stoyanov5.tallycounter.tallies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.stoyanov5.tallycounter.R;
+import com.stoyanov5.tallycounter.addtally.AddTallyActivity;
 import com.stoyanov5.tallycounter.data.Tally;
 
 import java.util.ArrayList;
@@ -81,7 +84,7 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //talliesPresenter.addNewTally();
+                talliesPresenter.addNewTally();
             }
         });
 
@@ -105,7 +108,13 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
 
     @Override
     public void showAddTally() {
-        // Intent to addTallyActivity
+        Intent intent = new Intent(getContext(), AddTallyActivity.class);
+        startActivityForResult(intent, AddTallyActivity.REQUEST_ADD_TALLY);
+    }
+
+    @Override
+    public void showSuccessfullySavedMessage() {
+        Snackbar.make(checkNotNull(getView()), "Tally saved", Snackbar.LENGTH_LONG).show();
     }
 
     TallyItemListener tallyItemListener = new TallyItemListener() {

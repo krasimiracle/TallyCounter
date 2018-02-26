@@ -81,4 +81,5 @@ public class AddTallyPresenter implements AddTallyContract.Presenter, TalliesDat
             addTallyView.showTalliesList();
         }
     }
+
 }

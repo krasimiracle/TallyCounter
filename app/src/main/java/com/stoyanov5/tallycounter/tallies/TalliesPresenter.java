@@ -1,7 +1,9 @@
 package com.stoyanov5.tallycounter.tallies;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
+import com.stoyanov5.tallycounter.addtally.AddTallyActivity;
 import com.stoyanov5.tallycounter.data.source.TalliesRepository;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -31,6 +33,13 @@ public class TalliesPresenter implements TalliesContract.Presenter {
     }
 
     @Override
+    public void result(int requestCode, int resultCode) {
+        if (AddTallyActivity.REQUEST_ADD_TALLY == requestCode && Activity.RESULT_OK == resultCode) {
+            talliesView.showSuccessfullySavedMessage();
+        }
+    }
+
+    @Override
     public void addNewTally() {
         talliesView.showAddTally();
     }
@@ -41,6 +50,7 @@ public class TalliesPresenter implements TalliesContract.Presenter {
             //Refresh tallies
         }
     }
+
 
 
 }
