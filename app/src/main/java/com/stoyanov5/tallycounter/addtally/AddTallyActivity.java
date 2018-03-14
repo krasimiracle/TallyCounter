@@ -27,19 +27,20 @@ public class AddTallyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addtally_activity);
 
-        // Set up toolbar.
-        Toolbar toolbar = findViewById(R.id.addtally_toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-
         AddTallyFragment addTallyFragment = (AddTallyFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.addtally_contentFrame);
 
         String tallyId = getIntent().getStringExtra(AddTallyFragment.ARGUMENT_TALLY_ID);
 
-        actionBar.setTitle(tallyId);
+        // Set up toolbar.
+        Toolbar toolbar = findViewById(R.id.addtally_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setTitle(tallyId);
+        }
 
         if (addTallyFragment == null) {
             addTallyFragment = AddTallyFragment.newInstance();

@@ -97,6 +97,11 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        talliesPresenter.result(requestCode, resultCode);
+    }
+
+    @Override
     public void setLoadingIndicator(boolean active) {
 
     }
