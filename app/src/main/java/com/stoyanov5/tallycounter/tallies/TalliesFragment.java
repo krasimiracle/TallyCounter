@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,6 +89,20 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
             }
         });
 
+        final ScrollChildSwipeRefresh scrollChildSwipeRefreshLayout =
+                root.findViewById(R.id.refresh_layout);
+
+        scrollChildSwipeRefreshLayout.setScrollUpChild(listView);
+
+        scrollChildSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                talliesPresenter.loadTallies(false);
+            }
+        });
+
+        setHasOptionsMenu(true);
+
         return root;
     }
 
@@ -102,8 +117,18 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
     }
 
     @Override
-    public void setLoadingIndicator(boolean active) {
+    public void setLoadingIndicator(final boolean active) {
+        if (getView() == null) {
+            return;
+        }
+        final SwipeRefreshLayout swipeRefreshLayout = getView().findViewById(R.id.refresh_layout);
 
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(active);
+            }
+        });
     }
 
     @Override
@@ -203,7 +228,7 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
         public View getView(int i, View view, ViewGroup viewGroup) {
             View rowView = view;
 
-            if (rowView == null){
+            if (rowView == null) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
                 rowView = inflater.inflate(R.layout.tally_item, viewGroup, false);
             }

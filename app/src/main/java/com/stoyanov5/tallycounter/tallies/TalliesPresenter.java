@@ -60,6 +60,9 @@ public class TalliesPresenter implements TalliesContract.Presenter {
         talliesRepository.getTallies(new TalliesDataSource.LoadTalliesCallback() {
             @Override
             public void onTalliesLoaded(List<Tally> tallies) {
+                if (!talliesView.isActive()) {
+                    return;
+                }
                 if (showLoadingUI) {
                     talliesView.setLoadingIndicator(false);
                 }
