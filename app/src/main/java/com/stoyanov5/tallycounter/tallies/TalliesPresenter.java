@@ -101,6 +101,7 @@ public class TalliesPresenter implements TalliesContract.Presenter {
 
     @Override
     public void incrementTally() {
+
     }
 
     @Override

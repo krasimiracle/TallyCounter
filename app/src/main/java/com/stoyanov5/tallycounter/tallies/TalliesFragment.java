@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -170,16 +171,6 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
         public void onTallyClicked(Tally clickedTally) {
             // presenter.openTallyDetail
         }
-
-        @Override
-        public void onTallyIncremented(Tally incrementedTally) {
-            talliesPresenter.incrementTally();
-        }
-
-        @Override
-        public void onTallyDecremented(Tally decrementedTally) {
-            talliesPresenter.decrementTally();
-        }
     };
 
     private void showNoTalliesView(String text, int iconRes) {
@@ -238,6 +229,27 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
             TextView title = rowView.findViewById(R.id.tally_title);
             title.setText(tally.getTitle());
 
+            final TextView counterText = rowView.findViewById(R.id.tally_counterText);
+
+            Button incrementButton = rowView.findViewById(R.id.incrementButton);
+            Button decrementButton = rowView.findViewById(R.id.decrementButton);
+
+            incrementButton.setTag(getItem(i));
+            incrementButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    counterText.setText(String.valueOf(Integer.parseInt(counterText.getText().toString()) + 1));
+                }
+            });
+
+            decrementButton.setTag(getItem(i));
+            decrementButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    counterText.setText(String.valueOf(Integer.parseInt(counterText.getText().toString()) - 1));
+                }
+            });
+
             return rowView;
         }
     }
@@ -246,8 +258,5 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
 
         void onTallyClicked(Tally clickedTally);
 
-        void onTallyIncremented(Tally incrementedTally);
-
-        void onTallyDecremented(Tally decrementedTally);
     }
 }
