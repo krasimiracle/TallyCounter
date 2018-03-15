@@ -36,5 +36,8 @@ public interface TalliesContract {
 
         void addNewTally();
 
+        void incrementTally();
+
+        void decrementTally();
     }
 }

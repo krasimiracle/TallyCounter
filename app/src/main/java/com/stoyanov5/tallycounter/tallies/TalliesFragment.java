@@ -173,12 +173,12 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
 
         @Override
         public void onTallyIncremented(Tally incrementedTally) {
-            // presenter.incrementTally
+            talliesPresenter.incrementTally();
         }
 
         @Override
         public void onTallyDecremented(Tally decrementedTally) {
-            // presenter.decrementTally
+            talliesPresenter.decrementTally();
         }
     };
 

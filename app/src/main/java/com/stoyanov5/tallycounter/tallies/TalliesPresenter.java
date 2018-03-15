@@ -99,4 +99,13 @@ public class TalliesPresenter implements TalliesContract.Presenter {
         talliesView.showAddTally();
     }
 
+    @Override
+    public void incrementTally() {
+    }
+
+    @Override
+    public void decrementTally() {
+
+    }
+
 }
