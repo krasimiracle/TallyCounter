@@ -8,6 +8,7 @@ import com.stoyanov5.tallycounter.data.Tally;
 import com.stoyanov5.tallycounter.data.source.TalliesDataSource;
 import com.stoyanov5.tallycounter.data.source.TalliesRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -50,6 +51,7 @@ public class TalliesPresenter implements TalliesContract.Presenter {
     }
 
     private void loadTallies(boolean forceUpdate, final boolean showLoadingUI) {
+
         if (showLoadingUI) {
             talliesView.setLoadingIndicator(true);
         }
@@ -60,14 +62,17 @@ public class TalliesPresenter implements TalliesContract.Presenter {
         talliesRepository.getTallies(new TalliesDataSource.LoadTalliesCallback() {
             @Override
             public void onTalliesLoaded(List<Tally> tallies) {
+                List<Tally> talliesToShow = new ArrayList<Tally>();
+
+                talliesToShow.addAll(tallies);
+
                 if (!talliesView.isActive()) {
                     return;
                 }
                 if (showLoadingUI) {
                     talliesView.setLoadingIndicator(false);
                 }
-
-                processTallies(tallies);
+                processTallies(talliesToShow);
             }
 
             @Override

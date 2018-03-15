@@ -95,23 +95,18 @@ public class TalliesRepository implements TalliesDataSource {
             return;
         }
 
-        if (cacheIsDirty) {
-            // Get the data from remote data source
-        }
-        else {
-            talliesLocalDataSource.getTallies(new LoadTalliesCallback() {
-                @Override
-                public void onTalliesLoaded(List<Tally> tallies) {
-                    refreshCache(tallies);
-                    callback.onTalliesLoaded(new ArrayList<>(cachedTallies.values()));
-                }
+        talliesLocalDataSource.getTallies(new LoadTalliesCallback() {
+            @Override
+            public void onTalliesLoaded(List<Tally> tallies) {
+                refreshCache(tallies);
+                callback.onTalliesLoaded(new ArrayList<>(cachedTallies.values()));
+            }
 
-                @Override
-                public void onDataNotAvailable() {
-                    // Get the data from remote data source
-                }
-            });
-        }
+            @Override
+            public void onDataNotAvailable() {
+                // Get the data from remote data source
+            }
+        });
     }
 
     @Override
@@ -124,7 +119,7 @@ public class TalliesRepository implements TalliesDataSource {
         checkNotNull(tally);
         talliesLocalDataSource.saveTally(tally);
 
-        if (cachedTallies == null){
+        if (cachedTallies == null) {
             cachedTallies = new LinkedHashMap<>();
         }
         cachedTallies.put(tally.getId(), tally);
