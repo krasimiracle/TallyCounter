@@ -4,4 +4,10 @@
     <string name="list_title">Tally List</string>
     <string name="you_have_no_tallies">You have no Tallies!</string>
     <string name="loading_tallies_error">Error while loading tallies</string>
+    <string name="title">Title</string>
+    <string name="addbutton">addButton</string>
+    <string name="add">+</string>
+    <string name="zero">0</string>
+    <string name="subtract">-</string>
+    <string name="subtractbutton">subtractButton</string>
 </resources>
