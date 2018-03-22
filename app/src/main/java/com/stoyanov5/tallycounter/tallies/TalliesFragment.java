@@ -76,6 +76,7 @@ public class TalliesFragment extends Fragment implements TalliesContract.View {
         listView.setAdapter(talliesAdapter);
         listView.setDivider(null);
         listView.setDividerHeight(0);
+        listView.setClipToPadding(false);
         talliesView = root.findViewById(R.id.tallies_linearlayout);
 
         // No Tallies View
