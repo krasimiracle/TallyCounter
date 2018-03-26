@@ -1,6 +1,6 @@
 # Tally Counter
 
- This app displays and saves your tallies.
+ This app displays and saves your tallies in Room database.
 
 ## Features
 
